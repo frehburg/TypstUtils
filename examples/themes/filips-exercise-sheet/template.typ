@@ -2,11 +2,12 @@
 #import "../../../utils/def.typ": *
 #import "../filips-math-paper/template.typ": paper
 
-#let exercise(description: [], title: none, subexercises: (), answer: []) = (
+#let exercise(description: [], title: none, subexercises: (), answer: [], hint: none) = (
   description: description,
   title: title,
   subexercises: subexercises,
-  answer: answer
+  answer: answer,
+  hint: hint,
 )
 
 // Recursive renderer for the nested subexercises
@@ -16,11 +17,14 @@
   let num-format = if level == 1 { sub-num } else { subsub-num }
 
   let items = subs.map(sub => {
+    let hint_text = if sub.hint != none {
+      [ \[_Hint_: #sub.hint\]]
+    }
     // Check if the subexercise has a title and prepend it if it does
     let body = if sub.title != none {
-      [#sub.title: ] + sub.description
+      [#sub.title: ] + sub.description + hint_text
     } else {
-      sub.description
+      sub.description + hint_text
     }
     
     if sub.subexercises.len() > 0 {
@@ -31,6 +35,7 @@
         subsub-num: subsub-num
       )
     }
+
     enum.item(body)
   })
 
@@ -67,6 +72,11 @@
 
         // Render nested subexercises
         render-subexercises(ex.subexercises, sub-num: sub-numbering, subsub-num: subsub-numbering)
+        
+        if ex.hint != none {
+          v(-1.5em)
+          [\ _Hint:_ #ex.hint]
+        }
 
         let callout-list = ()
         

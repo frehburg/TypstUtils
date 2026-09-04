@@ -37,6 +37,7 @@
             exercise(
               description: [$g(x) = e^x$],
               answer: [Test 1],
+              hint: [What do you notice in this subexercise?]
             ), 
             exercise(
               description: [$g(x) = 2e^x$],
@@ -45,6 +46,7 @@
           )
         )
       ),
+      hint: [This is an example hint for the entire exercise.]
     ),
     exercise(
       description: [Write a poem about purple elephants.],
