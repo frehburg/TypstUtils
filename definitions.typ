@@ -1,0 +1,1 @@
+#let tuple(..args) = $chevron.l #args.pos().join($,$) chevron.r$
