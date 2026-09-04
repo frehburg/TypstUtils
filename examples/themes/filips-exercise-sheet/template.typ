@@ -5,12 +5,13 @@
 #show link: set text(fill: rgb("#0000ee"))
 #show link: underline
 
-#let exercise(description: [], title: none, subexercises: (), answer: [], hint: none) = (
+#let exercise(description: [], title: none, subexercises: (), answer: [], hint: none, points: none) = (
   description: description,
   title: title,
   subexercises: subexercises,
   answer: answer,
   hint: hint,
+  points: points,
 )
 
 // Recursive renderer for the nested subexercises
@@ -23,11 +24,14 @@
     let hint_text = if sub.hint != none {
       [ \[_Hint_: #sub.hint\]]
     }
+    let point_text = if sub.points != none {
+      [ (#sub.points)]
+    }
     // Check if the subexercise has a title and prepend it if it does
     let body = if sub.title != none {
-      [#sub.title: ] + sub.description + hint_text
+      [#sub.title#point_text: ] + sub.description + hint_text
     } else {
-      sub.description + hint_text
+      point_text + [ ] + sub.description + hint_text
     }
     
     if sub.subexercises.len() > 0 {
@@ -69,6 +73,7 @@
         // Render exercise header and description
         [*Exercise #current-ex-num*]
         if ex.title != none [ (#ex.title)]
+        if ex.points != none [ [#ex.points]]
         [\ ]
         ex.description
         [\ ]

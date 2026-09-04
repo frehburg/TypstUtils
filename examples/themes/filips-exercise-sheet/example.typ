@@ -21,19 +21,23 @@
   exercises: (
     exercise(
       title: "Derivatives",
+      points: "3pts",
       description: [Compute the derivatives for the following functions.],
       subexercises: (
         exercise(
+          points: "1pt",
           description: [$f(x) = x$],
           answer: [ ],
         ),
         exercise(
+          points: "1pt",
           title: "Quadratic", 
           description: [$f(x) = x^2$],
           answer: [ ],
         ),
         exercise(
           description: [$g(x) = k e^x$], 
+          points: "1pt",
           answer: [ ],
           subexercises: (
             exercise(
@@ -51,6 +55,7 @@
       hint: [This is an example hint for the entire exercise.]
     ),
     exercise(
+      points: "3pts",
       description: [Write a poem about purple elephants.],
       answer: [Hello here is my poem.]
     )
