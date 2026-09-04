@@ -2,6 +2,9 @@
 #import "../../../utils/def.typ": *
 #import "../filips-math-paper/template.typ": paper
 
+#show link: set text(fill: rgb("#0000ee"))
+#show link: underline
+
 #let exercise(description: [], title: none, subexercises: (), answer: [], hint: none) = (
   description: description,
   title: title,

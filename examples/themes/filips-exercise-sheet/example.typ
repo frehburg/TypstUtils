@@ -1,5 +1,7 @@
 #import "template.typ": *
 
+
+
 #template(
   title: "Tutorial 1",
   course: "Esoteric Calculus",
