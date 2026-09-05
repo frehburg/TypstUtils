@@ -5,6 +5,7 @@
 #template(
   title: "Tutorial 1",
   course: "Esoteric Calculus",
+  deadline: "01-01-2027",
   authors: (
     (
       name:"Jane Doe",

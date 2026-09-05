@@ -6,7 +6,6 @@
 #show link: underline
 
 #let exercise(description: [], title: none, subexercises: (), answer: [], hint: none, points: none) = (
-  description: description,
   title: title,
   subexercises: subexercises,
   answer: answer,
@@ -52,6 +51,8 @@
 // The main template generating the sheet
 #let template(
   title: none,
+  deadline: none,
+  description: none,
   course: none,
   authors: (),
   institutions: (),
@@ -136,7 +137,7 @@
       }
     ],
     title: title,
-    subtitle: course,
+    subtitle: course + if deadline != none {text(style: "normal")[\ Due: #deadline]} else [],
     authors: authors,
     institutions: institutions,
   )
