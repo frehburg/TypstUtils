@@ -6,6 +6,7 @@
 #show link: underline
 
 #let exercise(description: [], title: none, subexercises: (), answer: [], hint: none, points: none) = (
+  description: description,
   title: title,
   subexercises: subexercises,
   answer: answer,
@@ -52,7 +53,6 @@
 #let template(
   title: none,
   deadline: none,
-  description: none,
   course: none,
   authors: (),
   institutions: (),
