@@ -60,7 +60,7 @@
       text(size: 1.2em, style: "italic", subtitle)
     }
 
-    #v(1em)
+    // #v(1em)
 
     // Authors
     #let count = authors.len()
@@ -77,7 +77,7 @@
       i += 1
     }
     
-    #v(0.8em)
+    // #v(0.8em)
     
     // Emails (Optional: displayed small below authors)
     #text(size: 0.8em, fill: gray)[
