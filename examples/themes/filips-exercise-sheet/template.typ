@@ -66,7 +66,6 @@
   hide-header: false
 ) = {
   let body-content = [
-      #v(-1.5em)
       #for (i, ex) in exercises.enumerate() {
         // Generate the number directly from the array index
         let current-ex-num = numbering(ex-numbering, i + 1)
@@ -141,7 +140,7 @@
     body-content
   } else {
     paper(
-      body-content,
+      v(-1.5em) + body-content,
       title: title,
       subtitle: course + if deadline != none {text(style: "normal")[\ Due: #deadline]} else [],
       authors: authors,
