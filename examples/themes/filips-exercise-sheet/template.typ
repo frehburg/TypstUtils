@@ -63,9 +63,9 @@
   lines: true,
   preline-space: 1em,
   postline-space: 1em,
+  hide-header: false
 ) = {
-  paper(
-    [
+  let body-content = [
       #v(-1.5em)
       #for (i, ex) in exercises.enumerate() {
         // Generate the number directly from the array index
@@ -135,10 +135,17 @@
           v(postline-space)
         }
       }
-    ],
-    title: title,
-    subtitle: course + if deadline != none {text(style: "normal")[\ Due: #deadline]} else [],
-    authors: authors,
-    institutions: institutions,
-  )
+    ]
+
+  if hide-header == true {
+    body-content
+  } else {
+    paper(
+      body-content,
+      title: title,
+      subtitle: course + if deadline != none {text(style: "normal")[\ Due: #deadline]} else [],
+      authors: authors,
+      institutions: institutions,
+    )
+  }
 }
