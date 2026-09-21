@@ -22,7 +22,7 @@
 
   let items = subs.map(sub => {
     let hint_text = if sub.hint != none {
-      [ \[_Hint_: #sub.hint\]]
+      [\ _Hint_: #sub.hint]
     }
     let point_text = if sub.points != none {
       [ (#sub.points)]
