@@ -93,6 +93,13 @@
     "icon": octique-inline("move-to-end", color: rgb("#ffffff"), width: 1em, height: 1em, baseline: 25%),
     "prefix": "Assumption"
   ),
+  "experiment": (
+    "color": rgb("#2b00a0e8"),
+    "neg-color": rgb("#FFFFFF"),
+    "text-color": rgb("#000000"),
+    "icon": octique-inline("telescope", color: rgb("#ffffff"), width: 1em, height: 1em, baseline: 25%),
+    "prefix": "Experiment"
+  ),
 )
 
 // Added `name: none` to the parameters
@@ -217,6 +224,7 @@
 #let notation = style-funcs.notation
 #let convention = style-funcs.convention
 #let assumption = style-funcs.assumption
+#let experiment = style-funcs.experiment
 
 #for (name,func) in style-funcs {
   func([Titulus totulus])[#lorem(14)]
