@@ -1,20 +1,28 @@
 #let def(concept, content) = {
-  let auto-tag = label("def-" + lower(concept.replace(" ", "-").replace(",", "").replace(")", "").replace("(", "").replace("/", "").replace("₂","2")))
+  let clean-id = lower(
+    concept
+      .replace(" ", "-")
+      .replace(",", "")
+      .replace(")", "")
+      .replace("(", "")
+      .replace("/", "")
+      .replace("₂", "2")
+  )
+  let auto-tag = label("def-" + clean-id)
   
   [
-    // The show rule is now locked inside the function's scope
     #show figure.where(kind: "definition"): it => block(
       fill: rgb("#f4f6f8"),
       inset: 12pt,
       radius: 4pt,
       width: 100%,
       stroke: rgb("#d0d7de")
-    )[#align(left + top)[
+    )[
+      #align(left + top)[
         *#it.supplement #it.counter.display(it.numbering)* (#emph(it.caption.body)): #it.body
       ]
     ]
     
-    // The figure and label remain exactly the same
     #figure(
       content,
       kind: "definition", 
@@ -25,6 +33,22 @@
 }
 
 #let def-group(..defs) = stack(
-  spacing: -.0em,
+  spacing: -0.0em,
   ..defs
 )
+
+// Document template that packages the ref show rule
+#let setup-definitions(body) = {
+  show ref: it => {
+    let el = it.element
+    if el != none and el.func() == figure and el.kind == "definition" {
+      let num = counter(figure.where(kind: "definition")).at(el.location())
+      let num-display = numbering(el.numbering, ..num)
+      [#el.caption.body (#el.supplement #num-display)]
+    } else {
+      it
+    }
+  }
+
+  body
+}
