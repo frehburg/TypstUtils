@@ -14,14 +14,29 @@
     paper: "a4",
     margin: (x: 2cm, y: 2.5cm),
     
-    // HEADER: Logic to show different header on page 2+
+    // HEADER: Logic to show current heading on page 2+
     header: context {
       if here().page() > 1 {
         set text(size: 9pt, style: "italic", fill: gray)
+
+        // Find the most recent level 1 heading before or on this page
+        let headings = query(heading.where(level: 1).before(here()))
+        let current_heading = if headings.len() > 0 {
+          headings.last().body
+        } else {
+          // If none before here, check if one starts later on this page
+          let future = query(heading.where(level: 1).after(here()))
+          if future.len() > 0 and future.first().location().page() == here().page() {
+            future.first().body
+          } else {
+            title // fallback to document title if no heading exists yet
+          }
+        }
+
         grid(
           columns: (1fr, 1fr),
-          align(left, journal),
-          align(right, title)
+          align(left, [#journal $dot$ #title]),
+          align(right, current_heading)
         )
         line(length: 100%, stroke: 0.5pt + gray)
       }
