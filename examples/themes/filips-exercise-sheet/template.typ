@@ -5,12 +5,13 @@
 #show link: set text(fill: rgb("#0000ee"))
 #show link: underline
 
-#let exercise(description: [], title: none, subexercises: (), answer: [], hint: none) = (
+#let exercise(description: [], title: none, subexercises: (), answer: [], hint: none, points: none) = (
   description: description,
   title: title,
   subexercises: subexercises,
   answer: answer,
   hint: hint,
+  points: points,
 )
 
 // Recursive renderer for the nested subexercises
@@ -21,13 +22,16 @@
 
   let items = subs.map(sub => {
     let hint_text = if sub.hint != none {
-      [ \[_Hint_: #sub.hint\]]
+      [\ _Hint_: #sub.hint]
+    }
+    let point_text = if sub.points != none {
+      [ (#sub.points)]
     }
     // Check if the subexercise has a title and prepend it if it does
     let body = if sub.title != none {
-      [#sub.title: ] + sub.description + hint_text
+      [#sub.title#point_text: ] + sub.description + hint_text
     } else {
-      sub.description + hint_text
+      point_text + [ ] + sub.description + hint_text
     }
     
     if sub.subexercises.len() > 0 {
@@ -48,6 +52,7 @@
 // The main template generating the sheet
 #let template(
   title: none,
+  deadline: none,
   course: none,
   authors: (),
   institutions: (),
@@ -58,10 +63,9 @@
   lines: true,
   preline-space: 1em,
   postline-space: 1em,
+  hide-header: false
 ) = {
-  paper(
-    [
-      #v(-1.5em)
+  let body-content = [
       #for (i, ex) in exercises.enumerate() {
         // Generate the number directly from the array index
         let current-ex-num = numbering(ex-numbering, i + 1)
@@ -69,6 +73,7 @@
         // Render exercise header and description
         [*Exercise #current-ex-num*]
         if ex.title != none [ (#ex.title)]
+        if ex.points != none [ [#ex.points]]
         [\ ]
         ex.description
         [\ ]
@@ -129,10 +134,17 @@
           v(postline-space)
         }
       }
-    ],
-    title: title,
-    subtitle: course,
-    authors: authors,
-    institutions: institutions,
-  )
+    ]
+
+  if hide-header == true {
+    body-content
+  } else {
+    paper(
+      v(-1.5em) + body-content,
+      title: title,
+      subtitle: course + if deadline != none {text(style: "normal")[\ Due: #deadline]} else [],
+      authors: authors,
+      institutions: institutions,
+    )
+  }
 }
