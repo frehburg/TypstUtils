@@ -19,7 +19,7 @@
       stroke: rgb("#d0d7de")
     )[
       #align(left + top)[
-        *#it.supplement #it.counter.display(it.numbering)* (#emph(it.caption.body)): #it.body
+        *#it.supplement #it.counter.display(it.numbering)* (#emph(it.caption.body)#if abbreviation != none {[, *abbr*: #abbreviation]}): #it.body
       ]
     ]
     
@@ -54,7 +54,7 @@
 }
 
 // example
-#def("Concept name")[
+#def("Concept name", abbreviation: "Ccpt")[
   Example def body. Usually the main _concept_ is written in italics.
 ]
-You can reference the concept definition via \@def-concept-name: @def-concept-name. #text(font: "")[Hello]
+You can reference the concept definition via \@def-concept-name: @def-concept-name. #text(font: "Noto Serif")[*abbr:*]
