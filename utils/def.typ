@@ -1,4 +1,4 @@
-#let def(concept, content) = {
+#let def(concept, abbreviation: none, content) = {
   let clean-id = lower(
     concept
       .replace(" ", "-")
@@ -52,3 +52,9 @@
 
   body
 }
+
+// example
+#def("Concept name")[
+  Example def body. Usually the main _concept_ is written in italics.
+]
+You can reference the concept definition via \@def-concept-name: @def-concept-name. #text(font: "")[Hello]
