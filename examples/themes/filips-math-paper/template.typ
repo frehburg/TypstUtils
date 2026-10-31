@@ -29,7 +29,7 @@
           if future.len() > 0 and future.first().location().page() == here().page() {
             future.first().body
           } else {
-            title // fallback to document title if no heading exists yet
+            subtitle // fallback to document subtitle if no heading exists yet
           }
         }
 
