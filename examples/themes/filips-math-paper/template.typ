@@ -28,7 +28,7 @@
           let future = query(heading.where(level: 1).after(here()))
           if future.len() > 0 and future.first().location().page() == here().page() {
             future.first().body
-          } else {
+          } else if subtitle != none {
             subtitle // fallback to document subtitle if no heading exists yet
           }
         }
